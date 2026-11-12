@@ -264,8 +264,6 @@ window.App = (function () {
     const container = document.getElementById('page-content');
     if (!container) return;
 
-    const user = Auth.getCurrentUser();
-
     switch (viewName) {
       case 'dashboard':
         container.innerHTML = await renderDashboardView();
@@ -728,9 +726,23 @@ window.App = (function () {
 })();
 
 // Start App when DOM is ready (or immediately if already parsed)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => App.init());
-} else {
-  App.init();
+function bootApp() {
+  if (window.App && typeof window.App.init === 'function') {
+    window.App.init().catch(function(err) {
+      console.error('App init error:', err);
+      // Fallback: If init crashes, still show the login screen so user is never stuck
+      if (window.Auth && typeof window.Auth.renderLoginScreen === 'function') {
+        var el = document.getElementById('app');
+        if (el) el.innerHTML = window.Auth.renderLoginScreen();
+      }
+    });
+  }
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  bootApp();
+}
+
 
