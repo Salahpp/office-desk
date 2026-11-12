@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1E3A8A">
+  <meta name="description" content="Office Desk - Enterprise Workforce Management PWA">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Office Desk">
+  <title>Office Desk — Workforce Management</title>
+  
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Initial Splash Loader -->
+    <div style="min-height: 100vh; display: grid; place-items: center; background: #0B1120; color: #F8FAFC; font-family: 'Bricolage Grotesque', sans-serif;">
+      <div style="text-align: center; padding: 20px;">
+        <div style="width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 18px; background: linear-gradient(135deg, #2563EB, #3B82F6); display: grid; place-items: center; font-size: 1.8rem; font-weight: 800; color: #fff; box-shadow: 0 8px 24px rgba(37,99,235,0.4);">
+          OD
+        </div>
+        <h2 style="margin: 0; font-size: 1.6rem; letter-spacing: -0.02em;">Office Desk</h2>
+        <p style="color: #94A3B8; font-size: 0.9rem; margin: 6px 0 20px;">Shah Digital Marketing Agency & Academy</p>
+        <div style="width: 140px; height: 4px; background: #1E293B; border-radius: 4px; margin: 0 auto; overflow: hidden; position: relative;">
+          <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 40%; background: #3B82F6; border-radius: 4px; animation: splashAnim 1.2s infinite ease-in-out;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes splashAnim {
+      0% { left: -40%; }
+      50% { left: 40%; width: 60%; }
+      100% { left: 100%; width: 30%; }
+    }
+  </style>
+
+  <!-- Load Modules with clean Relative Paths (Works in file:// AND http://) -->
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/camera.js"></script>
+  <script src="js/admin-settings.js"></script>
+  <script src="js/attendance.js"></script>
+  <script src="js/leaves.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/payroll.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Robust fallback bootstrapper in case of script blocking -->
+  <script>
+    window.addEventListener('error', function(e) {
+      console.warn('Script loading error detected:', e.message, e.filename);
+      var appEl = document.getElementById('app');
+      if (appEl && (!window.App || !window.DB)) {
+        appEl.innerHTML = `
+          <div style="min-height: 100vh; display: grid; place-items: center; background: #0B1120; color: #F8FAFC; padding: 20px; font-family: sans-serif;">
+            <div style="background: #1E293B; border: 1px solid #334155; border-radius: 16px; padding: 24px; max-width: 480px; text-align: center;">
+              <div style="font-size: 40px; margin-bottom: 12px;">⚠️</div>
+              <h3 style="margin-bottom: 8px;">Direct File Protocol Notice</h3>
+              <p style="color: #94A3B8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 16px;">
+                Your browser blocked local module loading over <code>file:///</code>. To run with full Camera, PWA and Geolocation features, please launch with the included local server:
+              </p>
+              <div style="background: #0F172A; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 0.9rem; color: #60A5FA; margin-bottom: 16px; text-align: left;">
+                node server.js
+              </div>
+              <p style="font-size: 0.8rem; color: #64748B;">Then open <a href="http://localhost:3000" style="color: #38BDF8;">http://localhost:3000</a> in your browser.</p>
+            </div>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

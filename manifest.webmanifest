@@ -1,0 +1,22 @@
+{
+  "name": "Office Desk",
+  "short_name": "OfficeDesk",
+  "description": "Workforce management: attendance, leaves, tasks & payroll",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#1E3A8A",
+  "background_color": "#0F172A",
+  "scope": "./",
+  "lang": "en",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Punch In/Out", "url": "/?view=punch", "description": "Quick attendance punch" },
+    { "name": "My Tasks", "url": "/?view=tasks", "description": "View my tasks" },
+    { "name": "Leave Request", "url": "/?view=leaves", "description": "Apply for leave" }
+  ],
+  "categories": ["business", "productivity"]
+}
